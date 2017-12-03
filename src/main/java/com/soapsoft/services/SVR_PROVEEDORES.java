@@ -91,7 +91,7 @@ public class SVR_PROVEEDORES {
                 obj_modificar.setModificadoEn(new Date());
 
                 dao.update(obj_modificar);
-                return "Se insertó el cliente";
+                return "Se modificó el cliente";
             }else{
                 return "El cliente no existe";
             }
