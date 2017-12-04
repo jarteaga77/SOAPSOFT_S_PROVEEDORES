@@ -2,7 +2,6 @@ package com.soapsoft.services;
 
 import com.soapsoft.Dao.TbProveedorDaoImpl;
 import com.soapsoft.Model.TbProveedor;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.jws.WebService;
@@ -19,8 +18,8 @@ public class SVR_PROVEEDORES {
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "fn_insertar")
-    public String fn_insertar(@WebParam(name = "nit") String nit, @WebParam(name = "razon_social") String razon_social, @WebParam(name = "contacto") String contacto, @WebParam(name = "telefono") String telefono, @WebParam(name = "celular") String celular, @WebParam(name = "direccion") String direccion, @WebParam(name = "estado") boolean estado, @WebParam(name = "creadoPor") String creadoPor) {
+    @WebMethod(operationName = "fn_insertar_prove")
+    public String fn_insertar_prove(@WebParam(name = "nit") String nit, @WebParam(name = "razon_social") String razon_social, @WebParam(name = "contacto") String contacto, @WebParam(name = "telefono") String telefono, @WebParam(name = "celular") String celular, @WebParam(name = "direccion") String direccion, @WebParam(name = "estado") boolean estado, @WebParam(name = "creadoPor") String creadoPor) {
         //TODO write your implementation code here:
         
         TbProveedor obj = new TbProveedor(nit, razon_social, contacto, telefono, celular, direccion, estado, creadoPor, new Date());
@@ -28,7 +27,7 @@ public class SVR_PROVEEDORES {
         try {
             TbProveedorDaoImpl dao = new TbProveedorDaoImpl();
             dao.create(obj);
-            return "Se insertó el cliente";
+            return "Se insertó el proveedor";
         } catch (Exception e) {
             throw e;
         }
@@ -37,8 +36,8 @@ public class SVR_PROVEEDORES {
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "fn_borrar")
-    public String fn_borrar(@WebParam(name = "ID") int ID) {
+    @WebMethod(operationName = "fn_borrar_prove")
+    public String fn_borrar_prove(@WebParam(name = "ID") int ID) {
         //TODO write your implementation code here:
          try {
             TbProveedorDaoImpl dao = new TbProveedorDaoImpl();
@@ -46,9 +45,9 @@ public class SVR_PROVEEDORES {
             
             if(obj != null){
                 dao.delete(obj);
-                return "Se eliminó el cliente";
+                return "Se eliminó el proveedor";
             }else{
-                return "El cliente no existe";
+                return "El proveedor no existe";
             }
         } catch (Exception e) {
             throw e;
@@ -56,8 +55,8 @@ public class SVR_PROVEEDORES {
         
     }
     
-    @WebMethod(operationName = "fn_modificar")
-    public String fn_modificar( 
+    @WebMethod(operationName = "fn_modificar_prove")
+    public String fn_modificar_prove( 
             @WebParam(name = "ID") int ID,
             @WebParam(name = "nit") String nit, 
             @WebParam(name = "razon_social") String razon_social, 
@@ -65,8 +64,6 @@ public class SVR_PROVEEDORES {
             @WebParam(name = "telefono") String telefono, 
             @WebParam(name = "celular") String celular, 
             @WebParam(name = "direccion") String direccion, 
-            @WebParam(name = "estado") boolean estado, 
-            @WebParam(name = "creadoPor") String creadoPor, 
             @WebParam(name = "modificadoPor") String modificadoPor
     ) {
         //TODO write your implementation code here:
@@ -82,15 +79,13 @@ public class SVR_PROVEEDORES {
                 obj_modificar.setContacto(contacto);
                 obj_modificar.setCelular(celular);
                 obj_modificar.setDireccion(direccion);
-                obj_modificar.setEstado(estado);
-                obj_modificar.setCreadoPor(creadoPor);
                 obj_modificar.setModificadoPor(modificadoPor);
                 obj_modificar.setModificadoEn(new Date());
 
                 dao.update(obj_modificar);
                 return "Se modificó el proveedor";
             }else{
-                return "El cliente no existe";
+                return "El proveedor no existe";
             }
         } catch (Exception e) {
             throw e;
@@ -101,11 +96,11 @@ public class SVR_PROVEEDORES {
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "fn_buscar")
-    public List<TbProveedor> fn_buscar(@WebParam(name = "ID") int ID) {
+    @WebMethod(operationName = "fn_buscar_all_prove")
+    public List<TbProveedor> fn_buscar_all_prove() {
         //TODO write your implementation code here:
          TbProveedorDaoImpl dao = new TbProveedorDaoImpl();
-         return dao.findAll();
+         return dao.fn_consultar_todos_prove();
     }
     
 }
