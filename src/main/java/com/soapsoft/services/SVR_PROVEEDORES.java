@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.soapsoft.services;
 
 import com.soapsoft.Dao.TbProveedorDaoImpl;
 import com.soapsoft.Model.TbProveedor;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -91,13 +88,24 @@ public class SVR_PROVEEDORES {
                 obj_modificar.setModificadoEn(new Date());
 
                 dao.update(obj_modificar);
-                return "Se modificó el cliente";
+                return "Se modificó el proveedor";
             }else{
                 return "El cliente no existe";
             }
         } catch (Exception e) {
             throw e;
         }
+    }
+    
+    
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "fn_buscar")
+    public List<TbProveedor> fn_buscar(@WebParam(name = "ID") int ID) {
+        //TODO write your implementation code here:
+         TbProveedorDaoImpl dao = new TbProveedorDaoImpl();
+         return dao.findAll();
     }
     
 }
